@@ -1,0 +1,9 @@
+module {{.Domain}}/{{.Module}}/{{.Name}}
+
+{{.GoVersion}}
+
+require (
+	git.gobies.org/pkg/jinygo v1.0.0
+)
+
+replace git.gobies.org/pkg/jinygo => ../../../pkg/jinygo

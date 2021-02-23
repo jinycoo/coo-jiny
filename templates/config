@@ -1,0 +1,74 @@
+# Project base config setting.
+appID   = 1
+name    = "{{.Name}}-{{.Module}}"
+version = "1.0.0"
+lang    = "zh-CN"
+mode    = "dev"
+
+#web server default setting
+[web]
+    port = ":80"
+    allowHosts = []
+    allowPatterns = []
+    signPaths = []
+    headers = {"Access-Control-Allow-Origin" = "*", "Access-Control-Allow-Headers" = "*", "Access-Control-Allow-Credentials" = "true" }
+
+    signingKey = "api.jinycoo.com"
+    signActive = false
+    [web.sign]
+        appID = "5393517068d18debeabf17953ad5904c"
+        pubKeys = [""]
+
+# log setting default output stderr with json format.
+[log]
+    level = "info"
+    filters = ["instance_id", "zone"]
+# mysql database setting.
+[mysql]
+	addr = "127.0.0.1:3306"
+	dsn = "{user}:{password}@tcp(127.0.0.1:3306)/{database}?timeout=1s&readTimeout=1s&writeTimeout=1s&parseTime=true&loc=Local&charset=utf8mb4,utf8"
+	readDSN = ["{user}:{password}@tcp(127.0.0.2:3306)/{database}?timeout=1s&readTimeout=1s&writeTimeout=1s&parseTime=true&loc=Local&charset=utf8mb4,utf8","{user}:{password}@tcp(127.0.0.3:3306)/{database}?timeout=1s&readTimeout=1s&writeTimeout=1s&parseTime=true&loc=Local&charset=utf8,utf8mb4"]
+	active = 20
+	idle = 10
+	idleTimeout ="4h"
+	queryTimeout = "200ms"
+	execTimeout = "300ms"
+	tranTimeout = "400ms"
+# cache - redis setting.
+redisExpire = "24h"
+[redis]
+    name = "{{.Name}}-{{.Module}}"
+    network = "tcp"
+    addr = "127.0.0.1:6379"
+    password = ""
+    db = 8
+    idle = 100
+    active = 100
+    dialTimeout = "1s"
+    readTimeout = "1s"
+    writeTimeout = "1s"
+    idleTimeout = "10s"
+# mq - rabbit mq setting.
+[mq]
+    dsn = "amqp://{user}:{password}@{host}:5672/{vhost}"
+    [mq.exchange]
+        name = "{exchange_name}"
+        type = "{type}"
+        routingKey = "{routing_key}"
+        declare = true
+        durable = true
+        autoDelete = false
+        internal = false
+        noWait = false
+        [mq.exchange.queue]
+             name = "{queue_name}"
+# elasticsearch 7/8 setting
+[es]
+    addresses = ["http://127.0.0.1:9200"]
+# elasticsearch 6.x
+[esv6]
+	addresses = ["http://127.0.0.1:9200"]
+# rpc - grpc setting.
+[rpc.g]
+    addr = "0.0.0.0:9000"
+    timeout = "1s"

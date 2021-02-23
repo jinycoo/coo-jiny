@@ -1,0 +1,17 @@
+/**------------------------------------------------------------**
+ * @filename {{.Namespace}}/{{.Name}}_test.go
+ * @author   {{.Owner}} - {{.Owner}}@{{.Domain}}
+ * @version  1.0.0
+ * @date     {{.Date}}
+ * @desc     {{.Module}}-{{.Name}} - xxxx test
+ **------------------------------------------------------------**/
+package {{.Namespace}}
+
+import "testing"
+
+func TestMethodName(t *testing.T) {
+    obj := "/"
+    if obj != "/" {
+        t.Errorf("something = %+v", obj)
+    }
+}

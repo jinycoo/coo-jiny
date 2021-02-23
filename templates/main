@@ -1,0 +1,57 @@
+/**------------------------------------------------------------**
+ * @filename cmd/main.go
+ * @author   {{.Owner}} - {{.Owner}}@{{.Domain}}
+ * @version  1.0.0
+ * @date     {{.Date}}
+ * @desc     {{.Module}}-{{.Name}} - main
+ **------------------------------------------------------------**/
+package main
+
+import (
+	"flag"
+	"os"
+	"os/signal"
+	"syscall"
+	"time"
+
+	"git.gobies.org/pkg/jinygo/errors"
+	"git.gobies.org/pkg/jinygo/log"
+
+	"{{.Domain}}/{{.Module}}/{{.Name}}/conf"
+	"{{.Domain}}/{{.Module}}/{{.Name}}/server/http"
+	"{{.Domain}}/{{.Module}}/{{.Name}}/service"
+)
+
+func main() {
+	flag.Parse()
+	if err := conf.Init(); err != nil {
+		panic(err)
+	}
+	errors.Init(conf.Conf.Lang)
+	log.Init(conf.Conf.Log, conf.Conf.Name)
+	defer log.Sync()
+	log.Info("{{.Name}}-{{.Module}} start")
+	svc := service.New(conf.Conf)
+	http.New(conf.Conf, svc)
+
+	c := make(chan os.Signal, 1)
+	signal.Notify(c, syscall.SIGHUP, syscall.SIGQUIT, syscall.SIGTERM, syscall.SIGINT)
+	for {
+		s := <-c
+		log.Infof("get a signal %s", s.String())
+		switch s {
+		case syscall.SIGQUIT, syscall.SIGTERM, syscall.SIGINT:
+			// ctx, cancel := context.WithTimeout(context.Background(), 35*time.Second)
+			// if err := httpSrv.Shutdown(ctx); err != nil {
+			// 	log.Error("httpSrv.Shutdown error(%v)", err)
+			// }
+			log.Info("{{.Name}}-{{.Module}} exit")
+			svc.Close()
+			time.Sleep(time.Second)
+			return
+		case syscall.SIGHUP:
+		default:
+			return
+		}
+	}
+}
