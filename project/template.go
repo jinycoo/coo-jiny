@@ -767,6 +767,8 @@ require (
 	go.baimaohui.net/pkg/jinygo v1.0.0
 )
 
+replace go.baimaohui.net/pkg/jinygo => ../../../pkg/jinygo
+
 `
 	_tplGRPCServer = `/**------------------------------------------------------------**
  * @filename grpc/service.go
