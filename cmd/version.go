@@ -19,7 +19,7 @@ import (
 )
 
 const (
-	Version     = "0.7.1"
+	Version     = "0.8.0"
 	versionTemp = `
   Jiny version: {{.JinyVersion}}
   ├── Go version:     {{.GoVersion}}
