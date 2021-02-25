@@ -118,8 +118,8 @@ import (
 	"syscall"
 	"time"
 
-	"git.gobies.org/pkg/jinygo/errors"
-	"git.gobies.org/pkg/jinygo/log"
+	"go.baimaohui.net/pkg/jinygo/errors"
+	"go.baimaohui.net/pkg/jinygo/log"
 
 	"{{.Domain}}/{{.Module}}/{{.Name}}/conf"
 	"{{.Domain}}/{{.Module}}/{{.Name}}/server/http"
@@ -174,16 +174,16 @@ import (
 	"os"
 	"path/filepath"
 
-	"git.gobies.org/pkg/jinygo/cache/redis"
-	"git.gobies.org/pkg/jinygo/config"
-	"git.gobies.org/pkg/jinygo/ctime"
-	"git.gobies.org/pkg/jinygo/database/sql"
-	"git.gobies.org/pkg/jinygo/errors"
-	"git.gobies.org/pkg/jinygo/log"
-    "git.gobies.org/pkg/jinygo/net/http/jiny"
-	"git.gobies.org/pkg/jinygo/queue/rabbitmq"
-	"git.gobies.org/pkg/jinygo/utils"
-	"git.gobies.org/pkg/jinygo/utils/file/toml"
+	"go.baimaohui.net/pkg/jinygo/cache/redis"
+	"go.baimaohui.net/pkg/jinygo/config"
+	"go.baimaohui.net/pkg/jinygo/ctime"
+	"go.baimaohui.net/pkg/jinygo/database/sql"
+	"go.baimaohui.net/pkg/jinygo/errors"
+	"go.baimaohui.net/pkg/jinygo/log"
+    "go.baimaohui.net/pkg/jinygo/net/http/jiny"
+	"go.baimaohui.net/pkg/jinygo/queue/rabbitmq"
+	"go.baimaohui.net/pkg/jinygo/utils"
+	"go.baimaohui.net/pkg/jinygo/utils/file/toml"
 )
 
 var (
@@ -281,8 +281,8 @@ import (
 	"syscall"
 	"time"
 
-	"git.gobies.org/pkg/jinygo/errors"
-	"git.gobies.org/pkg/jinygo/log"
+	"go.baimaohui.net/pkg/jinygo/errors"
+	"go.baimaohui.net/pkg/jinygo/log"
 
 	"{{.Domain}}/{{.Module}}/{{.Name}}/conf"
 	"{{.Domain}}/{{.Module}}/{{.Name}}/server/grpc"
@@ -344,8 +344,8 @@ import (
 	"context"
 	"time"
 
-	"git.gobies.org/pkg/jinygo/cache/redis"
-	"git.gobies.org/pkg/jinygo/database/sql"
+	"go.baimaohui.net/pkg/jinygo/cache/redis"
+	"go.baimaohui.net/pkg/jinygo/database/sql"
 
 	"{{.Domain}}/{{.Module}}/{{.Name}}/conf"
 )
@@ -398,7 +398,7 @@ package dao
 import (
 	"context"
 
-	"git.gobies.org/pkg/jinygo/database/sql"
+	"go.baimaohui.net/pkg/jinygo/database/sql"
 )
 
 const (
@@ -592,9 +592,9 @@ func (s *Service) Close() {
 package http
 
 import (
-	"git.gobies.org/pkg/jinygo/log"
-	"git.gobies.org/pkg/jinygo/net/http/jiny"
-	"git.gobies.org/pkg/jinygo/net/http/jiny/server"
+	"go.baimaohui.net/pkg/jinygo/log"
+	"go.baimaohui.net/pkg/jinygo/net/http/jiny"
+	"go.baimaohui.net/pkg/jinygo/net/http/jiny/server"
 
     "{{.Domain}}/{{.Module}}/{{.Name}}/conf"
 	"{{.Domain}}/{{.Module}}/{{.Name}}/service"
@@ -661,9 +661,9 @@ package http
 import (
 	"net/http"
 
-	"git.gobies.org/pkg/jinygo/log"
-	"git.gobies.org/pkg/jinygo/net/http/jiny"
-	"git.gobies.org/pkg/jinygo/net/rpc/warden"
+	"go.baimaohui.net/pkg/jinygo/log"
+	"go.baimaohui.net/pkg/jinygo/net/http/jiny"
+	"go.baimaohui.net/pkg/jinygo/net/rpc/warden"
 
 	pb "{{.Domain}}/{{.Module}}/{{.Name}}/api"
 	"{{.Domain}}/{{.Module}}/{{.Name}}/conf"
@@ -764,7 +764,7 @@ type Jinygo struct {
 {{.GoVersion}}
 
 require (
-	git.gobies.org/pkg/jinygo v1.0.0
+	go.baimaohui.net/pkg/jinygo v1.0.0
 )
 
 `
@@ -778,7 +778,7 @@ require (
 package grpc
 
 import (
-	"git.gobies.org/pkg/jinygo/net/rpc/warden"
+	"go.baimaohui.net/pkg/jinygo/net/rpc/warden"
 
 	pb "{{.Domain}}/{{.Module}}/{{.Name}}/api"
 	"{{.Domain}}/{{.Module}}/{{.Name}}/conf"
