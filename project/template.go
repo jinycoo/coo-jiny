@@ -763,9 +763,7 @@ type Jinygo struct {
 
 {{.GoVersion}}
 
-require (
-	go.baimaohui.net/pkg/jinygo v1.0.0
-)
+require go.baimaohui.net/pkg/jinygo v1.0.0
 
 replace go.baimaohui.net/pkg/jinygo => ../../../pkg/jinygo
 

@@ -45,12 +45,19 @@ func addVersion(cmd *cobra.Command) {
 		Use:   "version",
 		Short: `Print jiny version.`,
 		Run: func(cmd *cobra.Command, args []string) {
-			version()
+			fmt.Println("jiny version", Version)
+		},
+	})
+	cmd.AddCommand(&cobra.Command{
+		Use:   "info",
+		Short: `Print jiny info.`,
+		Run: func(cmd *cobra.Command, args []string) {
+			info()
 		},
 	})
 }
 
-func version() {
+func info() {
 	var doc bytes.Buffer
 	today := time.Now()
 	vo := VersionOptions{
