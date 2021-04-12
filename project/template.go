@@ -20,17 +20,21 @@ mode    = "dev"
     port = ":80"
     allowHosts = []
     allowPatterns = []
-    signPaths = []
     headers = {"Access-Control-Allow-Origin" = "*", "Access-Control-Allow-Headers" = "*", "Access-Control-Allow-Credentials" = "true" }
 
-    signingKey = "api.jinycoo.com"
     signActive = false
     [web.sign]
         appID = "5393517068d18debeabf17953ad5904c"
-        pubKeys = [""]
+        pubKeys = []
+		paths = []
+    [web.auth]
+        signingKey = "api.jinycoo.com"
+		expire = "1h"
+		reExpire = "24h"
 
 # log setting default output stderr with json format.
 [log]
+	file = "./logs/access.log"
     level = "info"
     filters = ["instance_id", "zone"]
 # mysql database setting.
@@ -51,7 +55,7 @@ redisExpire = "24h"
     network = "tcp"
     addr = "127.0.0.1:6379"
     password = ""
-    db = 8
+    db = 0
     idle = 100
     active = 100
     dialTimeout = "1s"
@@ -82,6 +86,8 @@ redisExpire = "24h"
 [rpc.g]
     addr = "0.0.0.0:9000"
     timeout = "1s"
+[setting]
+	settingKey = "setting value"
 `
 
 	_tplChangeLog = `## {{.Module}}/{{.Name}}
@@ -118,8 +124,8 @@ import (
 	"syscall"
 	"time"
 
-	"go.baimaohui.net/pkg/jinygo/errors"
-	"go.baimaohui.net/pkg/jinygo/log"
+	"go.jinycoo.com/pkg/jinygo/errors"
+	"go.jinycoo.com/pkg/jinygo/log"
 
 	"{{.Domain}}/{{.Module}}/{{.Name}}/conf"
 	"{{.Domain}}/{{.Module}}/{{.Name}}/server/http"
@@ -132,7 +138,7 @@ func main() {
 		panic(err)
 	}
 	errors.Init(conf.Conf.Lang)
-	log.Init(conf.Conf.Log, conf.Conf.Name)
+	log.Init(conf.Conf.Name, conf.Conf.Mode, conf.Conf.Log)
 	defer log.Sync()
 	log.Info("{{.Name}}-{{.Module}} start")
 	svc := service.New(conf.Conf)
@@ -174,16 +180,16 @@ import (
 	"os"
 	"path/filepath"
 
-	"go.baimaohui.net/pkg/jinygo/cache/redis"
-	"go.baimaohui.net/pkg/jinygo/config"
-	"go.baimaohui.net/pkg/jinygo/ctime"
-	"go.baimaohui.net/pkg/jinygo/database/sql"
-	"go.baimaohui.net/pkg/jinygo/errors"
-	"go.baimaohui.net/pkg/jinygo/log"
-    "go.baimaohui.net/pkg/jinygo/net/http/jiny"
-	"go.baimaohui.net/pkg/jinygo/queue/rabbitmq"
-	"go.baimaohui.net/pkg/jinygo/utils"
-	"go.baimaohui.net/pkg/jinygo/utils/file/toml"
+	"go.jinycoo.com/pkg/jinygo/cache/redis"
+	"go.jinycoo.com/pkg/jinygo/config"
+	"go.jinycoo.com/pkg/jinygo/ctime"
+	"go.jinycoo.com/pkg/jinygo/database/sql"
+	"go.jinycoo.com/pkg/jinygo/errors"
+	"go.jinycoo.com/pkg/jinygo/log"
+    "go.jinycoo.com/pkg/jinygo/net/http/jiny"
+	"go.jinycoo.com/pkg/jinygo/queue/rabbitmq"
+	"go.jinycoo.com/pkg/jinygo/utils"
+	"go.jinycoo.com/pkg/jinygo/utils/file/toml"
 )
 
 var (
@@ -281,8 +287,8 @@ import (
 	"syscall"
 	"time"
 
-	"go.baimaohui.net/pkg/jinygo/errors"
-	"go.baimaohui.net/pkg/jinygo/log"
+	"go.jinycoo.com/pkg/jinygo/errors"
+	"go.jinycoo.com/pkg/jinygo/log"
 
 	"{{.Domain}}/{{.Module}}/{{.Name}}/conf"
 	"{{.Domain}}/{{.Module}}/{{.Name}}/server/grpc"
@@ -344,8 +350,8 @@ import (
 	"context"
 	"time"
 
-	"go.baimaohui.net/pkg/jinygo/cache/redis"
-	"go.baimaohui.net/pkg/jinygo/database/sql"
+	"go.jinycoo.com/pkg/jinygo/cache/redis"
+	"go.jinycoo.com/pkg/jinygo/database/sql"
 
 	"{{.Domain}}/{{.Module}}/{{.Name}}/conf"
 )
@@ -398,7 +404,7 @@ package dao
 import (
 	"context"
 
-	"go.baimaohui.net/pkg/jinygo/database/sql"
+	"go.jinycoo.com/pkg/jinygo/database/sql"
 )
 
 const (
@@ -592,9 +598,9 @@ func (s *Service) Close() {
 package http
 
 import (
-	"go.baimaohui.net/pkg/jinygo/log"
-	"go.baimaohui.net/pkg/jinygo/net/http/jiny"
-	"go.baimaohui.net/pkg/jinygo/net/http/jiny/server"
+	"go.jinycoo.com/pkg/jinygo/log"
+	"go.jinycoo.com/pkg/jinygo/net/http/jiny"
+	"go.jinycoo.com/pkg/jinygo/net/http/jiny/server"
 
     "{{.Domain}}/{{.Module}}/{{.Name}}/conf"
 	"{{.Domain}}/{{.Module}}/{{.Name}}/service"
@@ -661,9 +667,9 @@ package http
 import (
 	"net/http"
 
-	"go.baimaohui.net/pkg/jinygo/log"
-	"go.baimaohui.net/pkg/jinygo/net/http/jiny"
-	"go.baimaohui.net/pkg/jinygo/net/rpc/warden"
+	"go.jinycoo.com/pkg/jinygo/log"
+	"go.jinycoo.com/pkg/jinygo/net/http/jiny"
+	"go.jinycoo.com/pkg/jinygo/net/rpc/warden"
 
 	pb "{{.Domain}}/{{.Module}}/{{.Name}}/api"
 	"{{.Domain}}/{{.Module}}/{{.Name}}/conf"
@@ -763,9 +769,9 @@ type Jinygo struct {
 
 {{.GoVersion}}
 
-require go.baimaohui.net/pkg/jinygo v1.0.0
+require go.jinycoo.com/pkg/jinygo v1.0.0
 
-replace go.baimaohui.net/pkg/jinygo => ../../../pkg/jinygo
+replace go.jinycoo.com/pkg/jinygo => ../../../pkg/jinygo
 
 `
 	_tplGRPCServer = `/**------------------------------------------------------------**
@@ -778,7 +784,7 @@ replace go.baimaohui.net/pkg/jinygo => ../../../pkg/jinygo
 package grpc
 
 import (
-	"go.baimaohui.net/pkg/jinygo/net/rpc/warden"
+	"go.jinycoo.com/pkg/jinygo/net/rpc/warden"
 
 	pb "{{.Domain}}/{{.Module}}/{{.Name}}/api"
 	"{{.Domain}}/{{.Module}}/{{.Name}}/conf"

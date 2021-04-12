@@ -3,7 +3,7 @@ module {{.Domain}}/{{.Module}}/{{.Name}}
 {{.GoVersion}}
 
 require (
-	go.baimaohui.net/pkg/jinygo v1.0.0
+	go.jinycoo.com/pkg/jinygo v1.0.0
 )
 
-replace go.baimaohui.net/pkg/jinygo => ../../../pkg/jinygo
+replace go.jinycoo.com/pkg/jinygo => ../../../pkg/jinygo

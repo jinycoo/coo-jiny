@@ -17,9 +17,11 @@ import (
 	"strings"
 	"time"
 
-	"github.com/spf13/cobra"
 	"github.com/jinycoo/jiny/project"
+	"github.com/spf13/cobra"
 )
+
+const AppPath = "app"
 
 func addCreate(cmd *cobra.Command) {
 	create := &cobra.Command{
@@ -56,7 +58,7 @@ func addCreate(cmd *cobra.Command) {
 				project.P.Domain = strings.ToLower(path.Base(project.P.RootPath))
 			}
 
-			project.P.Path = path.Join(project.P.RootPath, "app", project.P.Module, project.P.Name)
+			project.P.Path = path.Join(project.P.RootPath, AppPath, project.P.Module, project.P.Name)
 
 			// creata a project
 			if err := project.Create(); err != nil {

@@ -182,7 +182,7 @@ func Create() (err error) {
 	//	if os.IsNotExist(err) {
 	//		if err = os.MkdirAll(pkg, 0755); err == nil {
 	//			_ = os.Chdir(pkg)
-	//			ecmd := exec.Command("git", "clone", "https://go.baimaohui.net/pkg/jinygo.git")
+	//			ecmd := exec.Command("git", "clone", "https://go.jinycoo.com/pkg/jinygo.git")
 	//			err = ecmd.Run()
 	//			if err != nil {
 	//				fmt.Println(err)

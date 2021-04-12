@@ -14,8 +14,8 @@ import (
 	"syscall"
 	"time"
 
-	"go.baimaohui.net/pkg/jinygo/errors"
-	"go.baimaohui.net/pkg/jinygo/log"
+	"go.jinycoo.com/pkg/jinygo/errors"
+	"go.jinycoo.com/pkg/jinygo/log"
 
 	"{{.Domain}}/{{.Module}}/{{.Name}}/conf"
 	"{{.Domain}}/{{.Module}}/{{.Name}}/server/http"
