@@ -1,6 +1,6 @@
 /**------------------------------------------------------------**
  * @filename cmd/create.go
- * @author   jiny - caojingyin@baimaohui.net
+ * @author   jiny - caojingyin@jinycoo.com
  * @version  1.0.0
  * @date     2017/07/02 12:12
  * @desc     cmd-create - summary

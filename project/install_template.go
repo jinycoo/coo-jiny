@@ -1,6 +1,6 @@
 /**------------------------------------------------------------**
  * @filename project/k8s-helm-config.go
- * @author   jiny - caojingyin@baimaohui.net
+ * @author   jiny - caojingyin@jinycoo.com
  * @version  1.0.0
  * @date     2017/07/02 12:12
  * @desc     jinycoo.com - main - summary
@@ -23,8 +23,8 @@ PROJECT_NAME="{{.Name}}-{{.Module}}"
 VERSION="1.0"
 DEV_DOCKER_REGISTRY="hub.jinycoo.com"
 ALI_DOCKER_REGISTRY="registry.cn-beijing.aliyuncs.com/jinycoo"
-DEV_SERVER="172.16.0.200"   #开发部署服务器
-TEST_SERVER="172.16.0.200"  #测试部署服务器
+DEV_SERVER="172.16.0.100"   #开发部署服务器
+TEST_SERVER="172.16.0.100"  #测试部署服务器
 
 echo "版本："$VERSION
 

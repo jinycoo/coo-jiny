@@ -1,6 +1,6 @@
 /**------------------------------------------------------------**
  * @filename project/template.go
- * @author   jiny - caojingyin@baimaohui.net
+ * @author   jiny - caojingyin@jinycoo.com
  * @version  1.0.0
  * @date     2017/07/02 12:12
  * @desc     jinycoo.com - main - summary
@@ -43,7 +43,7 @@ mode    = "dev"
 	dsn = "{user}:{password}@tcp(127.0.0.1:3306)/{database}?timeout=1s&readTimeout=1s&writeTimeout=1s&parseTime=true&loc=Local&charset=utf8mb4,utf8"
 	readDSN = ["{user}:{password}@tcp(127.0.0.2:3306)/{database}?timeout=1s&readTimeout=1s&writeTimeout=1s&parseTime=true&loc=Local&charset=utf8mb4,utf8","{user}:{password}@tcp(127.0.0.3:3306)/{database}?timeout=1s&readTimeout=1s&writeTimeout=1s&parseTime=true&loc=Local&charset=utf8,utf8mb4"]
 	active = 20
-	idle = 10
+	idle = 20
 	idleTimeout ="4h"
 	queryTimeout = "200ms"
 	execTimeout = "300ms"
@@ -124,8 +124,8 @@ import (
 	"syscall"
 	"time"
 
-	"go.jinycoo.com/pkg/jinygo/errors"
-	"go.jinycoo.com/pkg/jinygo/log"
+	"github.com/jinycoo/jinygo/errors"
+	"github.com/jinycoo/jinygo/log"
 
 	"{{.Domain}}/{{.Module}}/{{.Name}}/conf"
 	"{{.Domain}}/{{.Module}}/{{.Name}}/server/http"
@@ -180,16 +180,16 @@ import (
 	"os"
 	"path/filepath"
 
-	"go.jinycoo.com/pkg/jinygo/cache/redis"
-	"go.jinycoo.com/pkg/jinygo/config"
-	"go.jinycoo.com/pkg/jinygo/ctime"
-	"go.jinycoo.com/pkg/jinygo/database/sql"
-	"go.jinycoo.com/pkg/jinygo/errors"
-	"go.jinycoo.com/pkg/jinygo/log"
-    "go.jinycoo.com/pkg/jinygo/net/http/jiny"
-	"go.jinycoo.com/pkg/jinygo/queue/rabbitmq"
-	"go.jinycoo.com/pkg/jinygo/utils"
-	"go.jinycoo.com/pkg/jinygo/utils/file/toml"
+	"github.com/jinycoo/jinygo/cache/redis"
+	"github.com/jinycoo/jinygo/config"
+	"github.com/jinycoo/jinygo/ctime"
+	"github.com/jinycoo/jinygo/database/sql"
+	"github.com/jinycoo/jinygo/errors"
+	"github.com/jinycoo/jinygo/log"
+    "github.com/jinycoo/jinygo/net/http/jiny"
+	"github.com/jinycoo/jinygo/queue/rabbitmq"
+	"github.com/jinycoo/jinygo/utils"
+	"github.com/jinycoo/jinygo/utils/file/toml"
 )
 
 var (
@@ -287,8 +287,8 @@ import (
 	"syscall"
 	"time"
 
-	"go.jinycoo.com/pkg/jinygo/errors"
-	"go.jinycoo.com/pkg/jinygo/log"
+	"github.com/jinycoo/jinygo/errors"
+	"github.com/jinycoo/jinygo/log"
 
 	"{{.Domain}}/{{.Module}}/{{.Name}}/conf"
 	"{{.Domain}}/{{.Module}}/{{.Name}}/server/grpc"
@@ -350,8 +350,8 @@ import (
 	"context"
 	"time"
 
-	"go.jinycoo.com/pkg/jinygo/cache/redis"
-	"go.jinycoo.com/pkg/jinygo/database/sql"
+	"github.com/jinycoo/jinygo/cache/redis"
+	"github.com/jinycoo/jinygo/database/sql"
 
 	"{{.Domain}}/{{.Module}}/{{.Name}}/conf"
 )
@@ -404,7 +404,7 @@ package dao
 import (
 	"context"
 
-	"go.jinycoo.com/pkg/jinygo/database/sql"
+	"github.com/jinycoo/jinygo/database/sql"
 )
 
 const (
@@ -598,9 +598,9 @@ func (s *Service) Close() {
 package http
 
 import (
-	"go.jinycoo.com/pkg/jinygo/log"
-	"go.jinycoo.com/pkg/jinygo/net/http/jiny"
-	"go.jinycoo.com/pkg/jinygo/net/http/jiny/server"
+	"github.com/jinycoo/jinygo/log"
+	"github.com/jinycoo/jinygo/net/http/jiny"
+	"github.com/jinycoo/jinygo/net/http/jiny/server"
 
     "{{.Domain}}/{{.Module}}/{{.Name}}/conf"
 	"{{.Domain}}/{{.Module}}/{{.Name}}/service"
@@ -667,9 +667,9 @@ package http
 import (
 	"net/http"
 
-	"go.jinycoo.com/pkg/jinygo/log"
-	"go.jinycoo.com/pkg/jinygo/net/http/jiny"
-	"go.jinycoo.com/pkg/jinygo/net/rpc/warden"
+	"github.com/jinycoo/jinygo/log"
+	"github.com/jinycoo/jinygo/net/http/jiny"
+	"github.com/jinycoo/jinygo/net/rpc/warden"
 
 	pb "{{.Domain}}/{{.Module}}/{{.Name}}/api"
 	"{{.Domain}}/{{.Module}}/{{.Name}}/conf"
@@ -769,10 +769,6 @@ type Jinygo struct {
 
 {{.GoVersion}}
 
-require go.jinycoo.com/pkg/jinygo v1.0.0
-
-replace go.jinycoo.com/pkg/jinygo => ../../../pkg/jinygo
-
 `
 	_tplGRPCServer = `/**------------------------------------------------------------**
  * @filename grpc/service.go
@@ -784,7 +780,7 @@ replace go.jinycoo.com/pkg/jinygo => ../../../pkg/jinygo
 package grpc
 
 import (
-	"go.jinycoo.com/pkg/jinygo/net/rpc/warden"
+	"github.com/jinycoo/jinygo/net/rpc/warden"
 
 	pb "{{.Domain}}/{{.Module}}/{{.Name}}/api"
 	"{{.Domain}}/{{.Module}}/{{.Name}}/conf"

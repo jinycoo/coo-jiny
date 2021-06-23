@@ -1,6 +1,6 @@
 /**------------------------------------------------------------**
  * @filename project/project.go
- * @author   jiny - caojingyin@baimaohui.net
+ * @author   jiny - caojingyin@jinycoo.com
  * @version  1.0.0
  * @date     2017/07/02 13:28
  * @desc     project-project - create info
@@ -182,7 +182,7 @@ func Create() (err error) {
 	//	if os.IsNotExist(err) {
 	//		if err = os.MkdirAll(pkg, 0755); err == nil {
 	//			_ = os.Chdir(pkg)
-	//			ecmd := exec.Command("git", "clone", "https://go.jinycoo.com/pkg/jinygo.git")
+	//			ecmd := exec.Command("git", "clone", "https://github.com/jinycoo/jinygo.git")
 	//			err = ecmd.Run()
 	//			if err != nil {
 	//				fmt.Println(err)

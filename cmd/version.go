@@ -1,6 +1,6 @@
 /**------------------------------------------------------------**
  * @filename cmd/version.go
- * @author   jiny - caojingyin@baimaohui.net
+ * @author   jiny - caojingyin@jinycoo.com
  * @version  1.0.0
  * @date     2017/07/02 12:05
  * @desc     cmd-version - summary

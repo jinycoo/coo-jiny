@@ -14,8 +14,8 @@ import (
 	"syscall"
 	"time"
 
-	"go.jinycoo.com/pkg/jinygo/errors"
-	"go.jinycoo.com/pkg/jinygo/log"
+	"github.com/jinycoo/jinygo/errors"
+	"github.com/jinycoo/jinygo/log"
 
 	"{{.Domain}}/{{.Module}}/{{.Name}}/conf"
 	"{{.Domain}}/{{.Module}}/{{.Name}}/server/http"

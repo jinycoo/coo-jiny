@@ -1,8 +1,8 @@
 /**------------------------------------------------------------**
  * @filename cmd/commands.go
- * @author   jiny - caojingyin@baimaohui.net
+ * @author   jiny - caojingyin@jinycoo.com
  * @version  1.0.0
- * @date     2017/07/02 13:17
+ * @date     2017/07/01 13:17
  * @desc     cmd-commands - summary
  **------------------------------------------------------------**/
 
