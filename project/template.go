@@ -34,8 +34,8 @@ mode    = "dev"   # test prod
 
 # log setting default output stderr with json format.
 [log]
-	file = "./logs/access.log"
     level = "info"
+	file = "./logs/access.log"
     filters = ["instance_id", "zone"]
 # mysql database setting.
 [mysql]
@@ -178,7 +178,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/jinycoo/jinygo/cache/redis"
+	"github.com/jinycoo/jinygo/cache"
 	"github.com/jinycoo/jinygo/config"
 	"github.com/jinycoo/jinygo/ctime"
 	"github.com/jinycoo/jinygo/database/sql"
@@ -203,11 +203,11 @@ type Config struct {
 	Version       string
 	Mode          string
 
+	Log           *log.CLogConfig
 	Web           *jiny.Config
-	Log           *log.Config
 	Mysql         *sql.Config // *MysqlDB
 	Mq            *rabbitmq.Config
-	Redis         *redis.Config
+	Redis         *cache.Config
 	RedisExpire   ctime.Duration
 }
 
