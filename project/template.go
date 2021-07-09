@@ -13,7 +13,7 @@ appID   = 1
 name    = "{{.Name}}-{{.Module}}"
 version = "1.0.0"
 lang    = "zh-CN"
-mode    = "dev"
+mode    = "dev"   # test prod
 
 #web server default setting
 [web]
@@ -124,7 +124,6 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/jinycoo/jinygo/errors"
 	"github.com/jinycoo/jinygo/log"
 
 	"{{.Domain}}/{{.Module}}/{{.Name}}/conf"
@@ -137,7 +136,6 @@ func main() {
 	if err := conf.Init(); err != nil {
 		panic(err)
 	}
-	errors.Init(conf.Conf.Lang)
 	log.Init(conf.Conf.Name, conf.Conf.Mode, conf.Conf.Log)
 	defer log.Sync()
 	log.Info("{{.Name}}-{{.Module}} start")
@@ -218,18 +216,22 @@ type Config struct {
 // 	Account  *sql.Config
 // }
 
-func Init() error {
+func Init() (err error) {
 	if confPath != "" {
-		return local()
+		err = local()
 	} else {
 		confPath = filepath.Join(utils.RootDir(), config.DefConfigFile)
 		_, err := os.Stat(confPath)
 		if err == nil {
-			return local()
+			err = local()
 		}else {
-			return remote()
+			err = remote()
 		}
 	}
+    if err != nil {
+		errors.Init(Conf.Lang)
+	}
+    return err
 }
 
 func local() (err error) {
@@ -287,7 +289,6 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/jinycoo/jinygo/errors"
 	"github.com/jinycoo/jinygo/log"
 
 	"{{.Domain}}/{{.Module}}/{{.Name}}/conf"
@@ -301,7 +302,6 @@ func main() {
 	if err := conf.Init(); err != nil {
 		panic(err)
 	}
-	errors.Init(conf.Conf.Lang)
 	log.Init(conf.Conf.Log, conf.Conf.Name)
 	defer log.Sync()
 

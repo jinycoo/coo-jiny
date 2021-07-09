@@ -177,21 +177,6 @@ func Create() (err error) {
 	if err = os.MkdirAll(P.Path, 0755); err != nil {
 		return
 	}
-	//pkg := filepath.Join(P.RootPath, "pkg")
-	//if _, err = os.Stat(pkg); err != nil {
-	//	if os.IsNotExist(err) {
-	//		if err = os.MkdirAll(pkg, 0755); err == nil {
-	//			_ = os.Chdir(pkg)
-	//			ecmd := exec.Command("git", "clone", "https://github.com/jinycoo/jinygo.git")
-	//			err = ecmd.Run()
-	//			if err != nil {
-	//				fmt.Println(err)
-	//			}
-	//		} else {
-	//			return
-	//		}
-	//	}
-	//}
 
 	for ty, files := range genFileList {
 		for t, v := range files {

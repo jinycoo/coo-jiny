@@ -14,11 +14,13 @@ import (
 	"os"
 	"os/user"
 	"path"
+	"runtime"
 	"strings"
 	"time"
 
-	"github.com/jinycoo/jiny/project"
 	"github.com/spf13/cobra"
+
+	"github.com/jinycoo/jiny/project"
 )
 
 const AppPath = "app"
@@ -26,7 +28,7 @@ const AppPath = "app"
 func addCreate(cmd *cobra.Command) {
 	create := &cobra.Command{
 		Use:   "new PROJECT_NAME",
-		Short: "创建新项目",
+		Short: "Create a new project",
 		Long:  `快速创建基于Jinygo的Golang项目，你只需要关注业务实现就好，其他一切给你搞定！`,
 		Example: `
   # 创建新项目 jiny new project_name -o owner -m module -p project_path -d company.com
@@ -55,7 +57,12 @@ func addCreate(cmd *cobra.Command) {
 				project.P.RootPath = pwd
 			}
 			if len(project.P.Domain) == 0 {
-				project.P.Domain = strings.ToLower(path.Base(project.P.RootPath))
+				domain := strings.ToLower(path.Base(project.P.RootPath))
+				if runtime.GOOS == "windows" {
+					sl := strings.Split(domain, "\\")
+					domain = sl[len(sl)-1]
+				}
+				project.P.Domain = domain
 			}
 
 			project.P.Path = path.Join(project.P.RootPath, AppPath, project.P.Module, project.P.Name)
